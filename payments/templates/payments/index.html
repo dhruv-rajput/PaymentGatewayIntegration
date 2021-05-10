@@ -1,0 +1,91 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+
+<body>
+    <style>
+        .w3-container {
+            font-size: 14px;
+            text-align: center;
+            background-color:lightblue;
+            color:midnightblue;
+            
+        }
+        
+
+        .center {
+            position: absolute;
+            text-align: center;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .donate{
+            color:lightpink;
+        }
+        
+    </style>
+
+    <div class="center">
+        <h3 class="donate">
+            <div class="w3-card-4">
+
+                <header class="w3-container w3-red">
+                    
+
+                    <h1 class="donate">DONATE</h1>
+                </header>
+
+                <div class="w3-container">
+                    <p>Donate for better cause. Let's fight COVID together!</p>
+
+                    <!-- PAYPAL BUTTONS HERE  -->
+                    <div id="paypal-button-container"></div>
+
+                    <!-- Include the PayPal JavaScript SDK -->
+                    <script src="https://www.paypal.com/sdk/js?client-id=AfRSuNL0wHiGSb7VSKDqz2BFuINa0gn53aw6cbZUZPaiKT8b1CsMfFyUQCsF3zv1CoJWlOZsbJ7l29hc&currency=USD"></script>
+                
+                    <script>
+                        // Render the PayPal button into #paypal-button-container
+                        paypal.Buttons({
+
+                            style:{
+                                color:'blue',
+                                shape:'pill',
+                                label:'pay',
+                                height: 40
+
+                            },
+                
+                            // Set up the transaction
+                            createOrder: function(data, actions) {
+                                return actions.order.create({
+                                    purchase_units: [{
+                                        amount: {
+                                            value: '100'
+                                        }
+                                    }]
+                                });
+                            },
+                
+                            // Finalize the transaction
+                            onApprove: function(data, actions) {
+                                return actions.order.capture().then(function(details) {
+                                    // Show a success message to the buyer
+                                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                                });
+                            }
+                
+                
+                        }).render('#paypal-button-container');
+                    </script>
+
+                </div>
+
+            </div>
+        </h3>
+
+    </div>
+
+</body>
